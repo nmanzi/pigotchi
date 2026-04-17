@@ -20,6 +20,9 @@ if img.width != args.width or img.height != args.height:
 
 pixels = list(img.get_flattened_data())
 
+dest_filename = args.output.split("/")[-1].split(".")[0]
+array_name = dest_filename.lower().replace(" ", "_")
+
 def to_rgb565(r, g, b):
     return ((r & 0xF8) << 8) | ((g & 0xFC) << 3) | (b >> 3)
 
@@ -31,7 +34,11 @@ lines = [
     "",
     f"// Auto-generated from {args.input} -- {args.width}x{args.height} RGB565",
     f"// {args.width*args.height} pixels, {args.width*args.height*2} bytes stored in flash",
-    f"static const uint16_t {args.output.split('/')[-1].split('.')[0]}[{args.width*args.height}] = {{",
+    "",
+    f"static const uint16_t {array_name}_width = {args.width};",
+    f"static const uint16_t {array_name}_height = {args.height};",
+    "",
+    f"static const uint16_t {array_name}[{args.width*args.height}] = {{",
 ]
 
 row_size = 16
