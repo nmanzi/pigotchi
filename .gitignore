@@ -18,3 +18,5 @@
 *.map
 *.uf2
 
+# Don't include the rom.h file
+rom.h
