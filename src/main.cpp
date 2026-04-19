@@ -404,6 +404,8 @@ static int hal_handler(void)
     tamalib_set_button(BTN_RIGHT,  buttons[2].debounced ? BTN_STATE_PRESSED : BTN_STATE_RELEASED);
 
     // Auto-save whenever BTN_LEFT is released
+    // This is terrible as RP2040 flash can't handle frequent writes, so I should
+    // probably add dedicated buttons, or save on a timer.
     if (buttons[0].debounced == BTN_STATE_RELEASED && buttons[0].last_raw == BTN_STATE_PRESSED) {
         state_save();
     }
@@ -440,10 +442,10 @@ void setup()
 {
     Serial.begin(115200);
     // Give serial a moment to come up (useful when debugging over USB CDC)
-    delay(500);
+    delay(1000);
     Serial.println("TamaLIB RP2040 starting...");
 
-    // ── EEPROM (save data) ─────────────────────────────────────────────────
+    // ── EEPROM (save data) ────────────────────────────────────────────────
     EEPROM.begin(sizeof(save_state_t));
     Serial.println("EEPROM initialised.");
  
