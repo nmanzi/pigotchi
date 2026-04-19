@@ -7,7 +7,7 @@
  *  ───────────────────
  *  OLED SCLK  → GPIO 2  (SPI0 SCK)
  *  OLED MOSI  → GPIO 3  (SPI0 TX)
- *  OLED CS    → GPIO 5  (SPI0 CSn)  — or any free GPIO driven manually
+ *  OLED CS    → GPIO 5  (SPI0 CSn)
  *  OLED DC    → GPIO 6
  *  OLED RST   → GPIO 7
  *
@@ -23,6 +23,8 @@
  *  Buzzer -  → GND
  *
  * Adjust any of the above to match your wiring.
+ * 
+ * TODO: Add buttons for save/load state and reset
  */
 
 #pragma once
